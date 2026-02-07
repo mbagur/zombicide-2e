@@ -4,6 +4,7 @@
 # Project specific
 Rubbish/
 cards/
+.megaignore
 
 # Dependencies
 node_modules/
