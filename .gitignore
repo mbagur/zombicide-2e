@@ -3,6 +3,7 @@
 
 # Project specific
 Rubbish/
+cards/
 
 # Dependencies
 node_modules/
