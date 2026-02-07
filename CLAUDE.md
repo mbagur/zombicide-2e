@@ -124,19 +124,154 @@ npm run build
 
 The optimized files will be in [app/dist](app/dist/). These can be deployed to any static hosting service.
 
-## Deployment Options
+## Deployment
 
-This app can be deployed to:
-- **Vercel** (recommended for Vite apps)
-- **Netlify**
-- **GitHub Pages**
-- **Firebase Hosting**
-- Any static file hosting service
+### Deploying to Vercel (Recommended)
 
-For mobile app deployment:
-- Can be wrapped with **Capacitor** for native iOS/Android apps
-- Can be packaged with **Electron** for desktop apps
-- Works as a Progressive Web App (PWA) with service worker setup
+Vercel is the recommended platform for deploying this Vite + React application. It provides:
+- ✅ Zero-configuration deployment for Vite apps
+- ✅ Automatic builds from GitHub
+- ✅ Global CDN for fast loading
+- ✅ Free SSL certificates
+- ✅ Preview deployments for every push
+- ✅ Custom domain support
+
+#### Prerequisites
+
+- Your code pushed to GitHub (already done ✓)
+- A Vercel account (free tier is sufficient)
+
+#### Deployment Steps
+
+**Method 1: Using Vercel Website (Easiest)**
+
+1. **Sign up / Log in to Vercel**
+   - Go to https://vercel.com
+   - Click "Sign Up" or "Log In"
+   - Choose "Continue with GitHub" (recommended for seamless integration)
+
+2. **Import Your Project**
+   - Click "Add New..." → "Project"
+   - Vercel will show your GitHub repositories
+   - Find and select `zombicide-2e`
+   - Click "Import"
+
+3. **Configure Build Settings**
+   Vercel should auto-detect the configuration, but verify:
+   - **Framework Preset**: Vite
+   - **Root Directory**: `app` (important - your app is in the app folder!)
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+
+4. **Deploy**
+   - Click "Deploy"
+   - Wait 1-2 minutes for the build to complete
+   - Your app will be live at: `https://zombicide-2e.vercel.app` (or similar)
+
+5. **Configure Custom Domain (Optional)**
+   - Go to your project settings
+   - Click "Domains"
+   - Add your custom domain and follow DNS configuration instructions
+
+**Method 2: Using Vercel CLI**
+
+1. **Install Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Login to Vercel**
+   ```bash
+   vercel login
+   ```
+
+3. **Deploy from the app directory**
+   ```bash
+   cd app
+   vercel
+   ```
+
+   Follow the prompts:
+   - Set up and deploy? **Y**
+   - Which scope? (select your account)
+   - Link to existing project? **N** (first time)
+   - What's your project's name? **zombicide-2e**
+   - In which directory is your code located? **.**
+   - Want to override settings? **N**
+
+4. **For production deployment**
+   ```bash
+   vercel --prod
+   ```
+
+#### Important: Root Directory Configuration
+
+Since your app is in the `app/` subdirectory, you MUST configure Vercel to use it:
+
+**Via Website:**
+- In Project Settings → General → Root Directory
+- Set to: `app`
+
+**Via vercel.json (in project root):**
+Create a file at the project root:
+```json
+{
+  "buildCommand": "cd app && npm run build",
+  "outputDirectory": "app/dist",
+  "installCommand": "cd app && npm install"
+}
+```
+
+#### Automatic Deployments
+
+Once connected to GitHub:
+- **Every push to `main`** → Automatic production deployment
+- **Every push to other branches** → Preview deployment with unique URL
+- **Every pull request** → Preview deployment with comment on PR
+
+#### Environment Variables
+
+If you need environment variables:
+1. Go to Project Settings → Environment Variables
+2. Add your variables
+3. Redeploy for changes to take effect
+
+#### Post-Deployment
+
+After deployment, you'll get:
+- **Production URL**: `https://zombicide-2e.vercel.app`
+- **Dashboard**: https://vercel.com/dashboard
+- **Deployment logs**: View in the Vercel dashboard
+- **Analytics**: Available in the dashboard (free tier includes basic analytics)
+
+### Other Deployment Options
+
+<details>
+<summary>Click to expand alternative platforms</summary>
+
+#### Netlify
+1. Connect GitHub repository
+2. Set build command: `cd app && npm run build`
+3. Set publish directory: `app/dist`
+
+#### GitHub Pages
+1. Install gh-pages: `npm install -D gh-pages`
+2. Add to package.json scripts: `"deploy": "gh-pages -d dist"`
+3. Run: `npm run deploy`
+
+#### Firebase Hosting
+1. Install Firebase CLI: `npm install -g firebase-tools`
+2. Run: `firebase init hosting`
+3. Set public directory to `app/dist`
+4. Deploy: `firebase deploy`
+
+#### Mobile App Deployment
+- **Capacitor**: Wrap as native iOS/Android app
+- **Electron**: Package as desktop app
+- **PWA**: Add service worker for offline support
+
+</details>
 
 ## Future Enhancements
 
