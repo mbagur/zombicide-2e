@@ -378,10 +378,30 @@ git remote set-url origin https://github.com/mbagur/zombicide-2e.git
 
 </details>
 
+## Development Workflow
+
+### Git Workflow Preferences
+
+**Important**: Always review changes before committing and pushing:
+
+1. Show summary of all file changes
+2. Display what was added/modified
+3. Wait for explicit approval before pushing to GitHub
+
+This ensures full transparency and control over what goes into the repository.
+
+### Commit Guidelines
+
+- Use descriptive commit messages
+- Include Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
+- Stage related changes together
+- Review diffs before committing
+
 ## Notes
 
 - All survivor data is loaded client-side from the CSV file
 - No backend or database required
 - Fully static and can run offline once loaded
 - TypeScript provides type safety for survivor data
-- Git repository is initialized and ready to push to GitHub
+- Git repository is initialized and connected to GitHub
+- Vercel deployment configuration included
